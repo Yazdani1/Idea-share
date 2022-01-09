@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
+import "./App.css";
+import Post from "./Post";
 const App = () => {
   const [allposts, setPosts] = useState([]);
 
-  const url="http://localhost:8080"
+  const url = "http://localhost:8080";
 
   // const loadallPosts = () => {
   //   axios
@@ -25,7 +26,7 @@ const App = () => {
       .then((res) => res.json())
       .then((result) => {
         setPosts(result);
-        console.log(result)
+        console.log(result);
       })
       .catch((err) => {
         console.log(err);
@@ -38,12 +39,18 @@ const App = () => {
 
   return (
     <div>
-      <h5>All Data</h5>
-      {allposts.map((item,index)=>(
-        <div key={item._id}>
-          <h1>{item.title}</h1>
-        </div>
-      ))}
+      <Post />
+
+      <div className="container show-allposts">
+        <h5 className="card">All Data</h5>
+        {allposts.map((item, index) => (
+          <div key={item._id}>
+            <div>
+              <h1 className="postinfo">{item.title}</h1>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
