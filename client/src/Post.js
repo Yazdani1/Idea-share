@@ -4,7 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 
-const Post = () => {
+const Post = ({totalpost}) => {
   const [title, setTitle] = useState("");
   const [des, setDes] = useState("");
   const [error, setError] = useState(false);
@@ -78,6 +78,7 @@ const Post = () => {
             <form>
               <div className="text-center">
                 <h5 className="text-center">Sign In To Your Account</h5>
+                <h5>Total post: {totalpost.length}</h5>
                 {showError()}
                 {showSuccess()}
               </div>

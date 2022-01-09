@@ -52,7 +52,7 @@ const App = () => {
 
   return (
     <div>
-      <Post />
+      <Post totalpost={allposts}/>
 
       <div className="container">
         {allposts.map((item, index) => (

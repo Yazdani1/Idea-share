@@ -15,10 +15,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 // "proxy": "http://localhost:8080"
+// "dev": "concurrently \"npm run server\" \"npm start --prefix client\""
+//"proxy": "http://localhost:5000"
 
-    // "dev": "concurrently \"npm run server\" \"npm start --prefix client\""
-
-    //"proxy": "http://localhost:5000"
 app.use("/api",require("./router/Post"));
 
 
