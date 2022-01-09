@@ -29,9 +29,20 @@ router.post("/post", (req, res) => {
 router.get("/getposts", (req, res) => {
   Post.find({})
     .sort({ date: "DESC" })
-    .limit(500)
     .then((result) => {
       res.json(result);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+router.delete("/delete/:id", (req, res) => {
+  var deletequery = { _id: req.params.id };
+
+  Post.findByIdAndDelete(deletequery)
+    .then((result) => {
+      res.json({ message: "Post deleted successfully" });
     })
     .catch((err) => {
       console.log(err);

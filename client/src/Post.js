@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import "./App.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 const Post = () => {
   const [title, setTitle] = useState("");
@@ -41,6 +44,10 @@ const Post = () => {
           setSuccess(true);
           setTitle("");
           setDes("");
+
+          toast.success("Post created Successfully!", {
+            position: toast.POSITION.TOP_RIGHT,
+          });
         }
       });
   };
@@ -113,6 +120,8 @@ const Post = () => {
           </div>
         </div>
       </div>
+      <ToastContainer autoClose={8000} />
+
     </div>
   );
 };
