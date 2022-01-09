@@ -4,45 +4,64 @@ import "./App.css";
 const Post = () => {
   const [title, setTitle] = useState("");
   const [des, setDes] = useState("");
-  const [imageUrl, setImageurl] = useState("");
-  const [url, setUrl] = useState("");
   const [error, setError] = useState(false);
-  const [picerror, setpicError] = useState(null);
   const [success, setSuccess] = useState(false);
 
-  //   const dataSubmit = (e) => {
-  //     e.preventDefault();
-  //     setError("");
+  const handleChange = (e) => {
+    setError("");
+    setTitle(e.target.value);
+  };
 
-  //     setSuccess(false);
-  //     const data = new FormData();
-  //     data.append("file", imageUrl);
-  //     data.append("upload_preset", "blog-app");
-  //     data.append("cloud_name", "yaz");
+  const handleChangedes = (e) => {
+    setError("");
+    setDes(e.target.value);
+  };
 
-  //     fetch("https://api.cloudinary.com/v1_1/yaz/image/upload", {
-  //       method: "post",
-  //       body: data,
-  //     })
-  //       .then((res) => res.json())
-  //       .then((data) => {
-  //         setUrl(data.url);
-  //         setImageurl("");
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  //     setImageurl("");
-  //   };
+  const submitData = (e) => {
+    e.preventDefault();
 
-  const showError = () => {
+    setError("");
+    setSuccess(false);
+
+    fetch("/api/post", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({ title, des }),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        if (result.error) {
+          setError(result.error);
+          console.log(result.error);
+        } else {
+          setError("");
+          setSuccess(true);
+          setTitle("");
+          setDes("");
+        }
+      });
+  };
+
+  const showError = () => (
     <div
       className="alert alert-danger"
       style={{ display: error ? "" : "none" }}
     >
       {error}
-    </div>;
-  };
+    </div>
+  );
+
+  const showSuccess = () => (
+    <div
+      className="alert alert-success"
+      style={{ display: success ? "" : "none" }}
+    >
+      Your Comment has been posted Successfully!
+    </div>
+  );
 
   return (
     <div className="container">
@@ -52,11 +71,14 @@ const Post = () => {
             <form>
               <div className="text-center">
                 <h5 className="text-center">Sign In To Your Account</h5>
+                {showError()}
+                {showSuccess()}
               </div>
               <div className="form-group">
                 <input
                   type="text"
-                  name="email"
+                  value={title}
+                  onChange={handleChange}
                   className="form-control"
                   placeholder="Title..."
                 />
@@ -64,7 +86,8 @@ const Post = () => {
               <div className="form-group">
                 <textarea
                   type="password"
-                  name="password"
+                  value={des}
+                  onChange={handleChangedes}
                   className="form-control"
                   rows="5"
                   placeholder="Description..."
@@ -80,7 +103,7 @@ const Post = () => {
                   className="btnContact"
                   value="Sign In"
                   onClick={(e) => {
-                    //   submitData(e);
+                    submitData(e);
                   }}
                 >
                   Submit
