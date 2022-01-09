@@ -5,10 +5,8 @@ import Post from "./Post";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 const App = () => {
   const [allposts, setPosts] = useState([]);
-
   const loadallPosts = () => {
     fetch(`/api/getposts`, {
       method: "GET",
@@ -26,7 +24,6 @@ const App = () => {
         console.log(err);
       });
   };
-
   const deletePost = (id) => {
     fetch("/api/delete/" + id, {
       method: "DELETE",
@@ -45,7 +42,6 @@ const App = () => {
         console.log(err);
       });
   };
-
   useEffect(() => {
     loadallPosts();
   }, [allposts]);
