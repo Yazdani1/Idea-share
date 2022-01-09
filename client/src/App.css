@@ -37,3 +37,13 @@ input.form-control {
 .show-allposts{
   margin-top: 50px;
 }
+
+
+
+
+.post-items{
+  margin: 10px;
+  padding: 20px;
+  font-size: 19px;
+  font-weight: bold;
+}

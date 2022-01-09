@@ -5,19 +5,6 @@ import Post from "./Post";
 const App = () => {
   const [allposts, setPosts] = useState([]);
 
-  const url = "http://localhost:8080";
-
-  // const loadallPosts = () => {
-  //   axios
-  //     .get("http://localhost:8080/api/getposts")
-  //     .then((postresult) => {
-  //       setPosts(postresult.data);
-  //       console.log(postresult.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // };
 
   const loadallPosts = () => {
     fetch(`/api/getposts`, {
@@ -41,12 +28,15 @@ const App = () => {
     <div>
       <Post />
 
-      <div className="container show-allposts">
-        <h5 className="card">All Data</h5>
+      <div className="container">
         {allposts.map((item, index) => (
-          <div key={item._id}>
+          <div className="card post-items" key={item._id}>
             <div>
-              <h1 className="postinfo">{item.title}</h1>
+              <p className="postinfo">{item.title}</p>
+              <p className="postinfo">{item.des}</p>
+              <p className="postinfo">{item.date}</p>
+
+
             </div>
           </div>
         ))}
