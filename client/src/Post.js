@@ -77,7 +77,7 @@ const Post = ({totalpost}) => {
           <div className="form-design card">
             <form>
               <div className="text-center">
-                <h5 className="text-center">Sign In To Your Account</h5>
+                <h5 className="text-center">Create Your Post</h5>
                 <h5>Total post: {totalpost.length}</h5>
                 {showError()}
                 {showSuccess()}
